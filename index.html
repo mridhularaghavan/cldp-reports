@@ -4,111 +4,157 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reports – CLDP</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23003049'/><text x='16' y='23' font-family='sans-serif' font-size='19' font-weight='700' fill='white' text-anchor='middle'>J</text></svg>">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* ── TYPE SCALE ──────────────────────────────────────────────
+     Display  — 36px / 800  — page title
+     H2       — 18px / 700  — section headers
+     Body     — 15px / 400  — prose / explainer
+     UI       — 13px / 600  — labels, card titles
+     Small    — 12px / 400  — meta, dates
+     Eyebrow  — 11px / 600  — uppercase labels
+  ──────────────────────────────────────────────────────────── */
+
   body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Manrope', system-ui, sans-serif;
     background: #f7f7f5;
     color: #1a1a1a;
     min-height: 100vh;
-    padding: 64px 24px;
   }
 
+  /* ── COVER IMAGE ─────────────────────────────────────────── */
+  .cover {
+    width: 100%;
+    height: 240px;
+    background-image: url('usda_apple.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* ── PAGE CONTENT ────────────────────────────────────────── */
   .container {
-    max-width: 860px;
+    max-width: 1100px;
     margin: 0 auto;
+    padding: 0 48px 80px;
   }
 
-  .header {
-    margin-bottom: 48px;
+  /* ── PAGE IDENTITY ───────────────────────────────────────── */
+  .page-identity {
+    padding-top: 40px;
+    margin-bottom: 24px;
   }
 
   .header-eyebrow {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
     color: #888;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
-  .header h1 {
-    font-size: 32px;
-    font-weight: 600;
+  .page-title {
+    font-size: 36px;
+    font-weight: 800;
     color: #1a1a1a;
-    line-height: 1.2;
+    line-height: 1.15;
+    margin-bottom: 14px;
   }
 
-  .header p {
-    margin-top: 10px;
+  .page-desc {
     font-size: 15px;
-    color: #666;
-    line-height: 1.6;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.7;
+    max-width: 620px;
   }
 
   .divider {
     border: none;
     border-top: 1px solid #e0e0e0;
-    margin-bottom: 40px;
+    margin: 36px 0 40px;
   }
 
-  .state-section {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 0 32px;
-    margin-bottom: 40px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid #e8e8e8;
-  }
-
-  .state-section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-  }
-
-  .state-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #1a1a1a;
-    padding-top: 3px;
-  }
-
-  .state-cards {
+  /* ── REPORT GRID ─────────────────────────────────────────── */
+  .report-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 28px;
   }
 
   .empty {
     font-size: 13px;
     color: #bbb;
-    padding-top: 3px;
   }
 
+  /* ── CARDS ───────────────────────────────────────────────── */
   .card {
     background: #fff;
     border: 1px solid #e8e8e8;
-    border-radius: 8px;
-    padding: 18px 20px 16px;
+    border-radius: 12px;
     text-decoration: none;
     color: inherit;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    width: 240px;
-    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    width: 340px;
+    overflow: hidden;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
   }
 
   .card:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    border-color: #ccc;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+    border-color: #669BBC;
+    transform: translateY(-3px);
+  }
+
+  .card-img {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+  }
+
+  .card-state {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #003049;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: #bbb;
+    letter-spacing: 0.04em;
+  }
+
+  .card-img.ka {
+    background-image: url('cover_ka.jpg');
+  }
+
+  .card-img.up {
+    background-image: url('https://images.unsplash.com/photo-1564507592333-c60657eea523?fm=jpg&q=80&w=600&auto=format&fit=crop');
+  }
+
+  .card-body {
+    padding: 14px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .card-title {
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     color: #1a1a1a;
     line-height: 1.4;
   }
@@ -122,46 +168,97 @@
     align-items: center;
   }
 
+  /* ── SITE HEADER & FOOTER ────────────────────────────────── */
+  .site-header {
+    height: 44px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    background: #fff;
+  }
+  .site-header .brand {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+  .site-header .brand span {
+    font-weight: 400;
+    color: #9ca3af;
+  }
+  .site-footer {
+    border-top: 1px solid #e5e7eb;
+    padding: 14px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 64px;
+  }
+
   .tag {
-    background: #f0f6f2;
-    color: #3d6b4f;
+    background: #FDF0D5;
+    color: #003049;
     border-radius: 4px;
     padding: 2px 7px;
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
   }
 </style>
 </head>
 <body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">Janaagraha <span>· CLDP</span></a>
+</header>
+
+<div class="cover"></div>
+
 <div class="container">
-  <div class="header">
+  <div class="page-identity">
     <div class="header-eyebrow">Janaagraha · CLDP</div>
-    <h1>Reports</h1>
-    <p>WhatsApp group engagement analyses by state.</p>
+    <h1 class="page-title">CLDP Reports</h1>
+    <p class="page-desc">A home for all WhatsApp engagement reports, organised by state and report number.</p>
   </div>
 
   <hr class="divider">
 
-  <div class="state-section">
-    <div class="state-label">Karnataka</div>
-    <div class="state-cards">
-      <a class="card" href="CLDP_KA_Engagement_Report.html">
+  <div class="report-grid">
+    <a class="card" href="2026/ka-report-1/">
+      <div class="card-img ka"></div>
+      <div class="card-body">
+        <div class="card-state">Karnataka <span class="card-num">#1</span></div>
         <div class="card-title">Engagement Report – CLDP Karnataka</div>
         <div class="card-meta">
           <span>Nov 2025 – Apr 2026</span>
-          <span class="tag">WhatsApp Analysis</span>
+          <span class="tag">84 clusters</span>
         </div>
-      </a>
-    </div>
-  </div>
-
-  <div class="state-section">
-    <div class="state-label">Uttar Pradesh</div>
-    <div class="state-cards">
-      <span class="empty">No reports yet</span>
-    </div>
+        <div class="card-meta" style="color:#bbb;">Generated 23 Apr 2026</div>
+      </div>
+    </a>
+    <a class="card" href="2026/up-report-1/">
+      <div class="card-img up"></div>
+      <div class="card-body">
+        <div class="card-state">Uttar Pradesh <span class="card-num">#2</span></div>
+        <div class="card-title">Engagement Report – CLDP Uttar Pradesh</div>
+        <div class="card-meta">
+          <span>Oct 2025 – Apr 2026</span>
+          <span class="tag">36 clusters</span>
+        </div>
+        <div class="card-meta" style="color:#bbb;">Generated 23 Apr 2026</div>
+      </div>
+    </a>
   </div>
 
 </div>
+
+<footer class="site-footer">
+  <span>Janaagraha · CLDP Programme</span>
+  <span>Internal use only</span>
+</footer>
+
 </body>
 </html>
