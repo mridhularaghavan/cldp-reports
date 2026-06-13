@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engagement Report – CLDP Assam (Jan 2026 – Jun 2026)</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23003049'/><text x='16' y='23' font-family='sans-serif' font-size='19' font-weight='700' fill='white' text-anchor='middle'>J</text></svg>">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+/* ── RESET & BASE ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:       #003049;
+  --green-light: #FDF0D5;
+  --green-mid:   #669BBC;
+  --navy:        #780000;
+  --navy-light:  #eef4f8;
+  --text:        #111827;
+  --muted:       #6b7280;
+  --border:      #e5e7eb;
+  --white:       #ffffff;
+  --red:         #C1121F;
+  --amber:       #C1121F;
+}
+
+body {
+  font-family: 'Manrope', system-ui, sans-serif;
+  background: var(--white);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────────
+   Total width: 1280px (centred)
+   About section: full 1280px
+   Below: TOC sidebar 220px | gap 64px | content ~996px
+─────────────────────────────────────────────────────────────── */
+.outer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+.about-section {
+  padding: 56px 0 48px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+.about-section .kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+
+.about-section h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.4px;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+.about-section .subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+
+.about-section h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: 0;
+}
+
+.body-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.toc-col {
+  position: sticky;
+  top: 32px;
+  padding: 32px 0;
+}
+
+.toc-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.toc-list li { margin-bottom: 10px; }
+.toc-list a {
+  font-size: 13px;
+  color: #374151;
+  text-decoration: none;
+}
+.toc-list a:hover { color: var(--green); }
+.toc-list a.active {
+  font-weight: 700;
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* ── PAGE SHELL ─────────────────────────────────────────────── */
+.main {
+  padding: 0;
+  min-width: 0;
+}
+
+.page {
+  padding: 48px 0;
+  position: relative;
+}
+
+.page + .page {
+  border-top: 1px solid var(--border);
+}
+
+/* ── PAGE HEADER BAND ───────────────────────────────────────── */
+.page-band {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+}
+.page-band .report-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.page-band .section-num {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+/* ── TITLE PAGE ─────────────────────────────────────────────── */
+.title-block { margin-bottom: 44px; }
+.title-block .kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+.title-block h1 {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.5px;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.title-block .subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* ── KPI STRIP ──────────────────────────────────────────────── */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.kpi-card {
+  background: var(--white);
+  border-radius: 0;
+  padding: 20px 24px 20px 0;
+  border-left: none;
+  border-top: 2px solid var(--text);
+  box-shadow: none;
+}
+.kpi-card .kpi-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+.kpi-card .kpi-val {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.kpi-card .kpi-sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ── POST HIGHLIGHT BOX ─────────────────────────────────────── */
+.highlight-box {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.highlight-box .hb-header {
+  background: var(--navy-light);
+  padding: 12px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: .03em;
+}
+.highlight-box .hb-question {
+  padding: 14px 20px;
+  font-size: 14px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  font-style: italic;
+}
+.highlight-box .hb-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.highlight-box .hb-stat {
+  padding: 16px 20px;
+  border-right: 1px solid var(--border);
+}
+.highlight-box .hb-stat:last-child { border-right: none; }
+.highlight-box .hb-stat .hs-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.highlight-box .hb-stat .hs-val {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.highlight-box .hb-stat .hs-sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ── WORD CLOUD ─────────────────────────────────────────────── */
+.cloud-section { margin-top: 8px; }
+.cloud-section .cloud-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.cloud-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.cloud-tag {
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.cloud-tag.xl  { font-size: 16px; background: #669BBC; color: #003049; }
+.cloud-tag.lg  { font-size: 14px; background: #99c4d8; color: #003049; }
+.cloud-tag.md  { font-size: 13px; background: #c5dcea; color: #003049; }
+.cloud-tag.sm  { font-size: 12px; background: #e8f1f7; color: #4a7a96; border: 1px solid #99c4d8; }
+
+.area-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.area-row .area-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--muted);
+  margin-right: 4px;
+}
+.area-pill {
+  border: 1.5px solid var(--green);
+  color: var(--green);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ── SECTION HEADINGS ───────────────────────────────────────── */
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.3px;
+  margin-bottom: 6px;
+}
+.section-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+h3 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+.theme-desc {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.65;
+  margin-bottom: 22px;
+}
+
+/* ── THEMES LAYOUT ──────────────────────────────────────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── SENDER BARS ────────────────────────────────────────────── */
+.sender-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  align-items: start;
+}
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.bar-name {
+  font-size: 12.5px;
+  color: var(--text);
+  width: 210px;
+  flex-shrink: 0;
+  text-align: right;
+  line-height: 1.3;
+}
+.bar-name .badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--navy);
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.bar-track {
+  flex: 1;
+  background: var(--border);
+  border-radius: 4px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--green);
+  transition: width .3s;
+}
+.bar-fill.jg { background: var(--navy); }
+.bar-fill.others { background: var(--green-mid); }
+.bar-num {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  width: 24px;
+}
+.chart-note {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* ── POST CARDS ─────────────────────────────────────────────── */
+.post-group-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  padding: 8px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.post-group-label .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-green { background: var(--green); }
+.dot-grey  { background: #9ca3af; }
+
+.post-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: start;
+}
+.post-card.low  { background: #fafafa; }
+.post-meta { font-size: 11.5px; color: var(--muted); margin-bottom: 4px; }
+.post-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.post-quote { font-size: 13px; color: #374151; font-style: italic; margin-bottom: 6px; }
+.post-stat-pill {
+  display: inline-block;
+  background: var(--green-light);
+  color: var(--green);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+.post-card.low .post-stat-pill {
+  background: #f3f4f6;
+  color: var(--muted);
+}
+
+/* ── POLL ───────────────────────────────────────────────────── */
+.poll-wrap {
+  background: var(--green-light);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 0;
+}
+.poll-q {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.poll-meta { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+.poll-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.poll-label { width: 160px; flex-shrink: 0; font-size: 13.5px; color: var(--text); font-weight: 500; }
+.poll-track {
+  flex: 1;
+  background: rgba(255,255,255,.6);
+  border-radius: 4px;
+  height: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.poll-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  min-width: 60px;
+}
+.poll-fill.winner { background: #780000; }
+.poll-votes-label { font-size: 12px; color: var(--muted); width: 64px; text-align: right; flex-shrink: 0; }
+.poll-footer { font-size: 12px; color: var(--muted); margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--green-mid); }
+
+/* ── MONTH TABLE ────────────────────────────────────────────── */
+.mtable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 32px;
+}
+.mtable thead th {
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.mtable tbody td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text);
+}
+.mtable tbody tr:hover td { background: #eef4f8; }
+.trend-up   { color: #16a34a; font-weight: 700; }
+.trend-down { color: var(--red); font-weight: 700; }
+.trend-flat { color: var(--muted); }
+
+/* ── OBSERVATIONS ───────────────────────────────────────────── */
+.obs-block { margin-bottom: 18px; }
+.obs-block .obs-period {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.obs-block p { font-size: 14px; color: #374151; line-height: 1.65; }
+
+/* ── CAVEATS ────────────────────────────────────────────────── */
+.caveat {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.caveat:first-of-type { border-top: 1px solid var(--border); }
+.caveat-n {
+  width: 26px; height: 26px;
+  background: #003049;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.caveat-body { font-size: 13.5px; line-height: 1.6; color: #374151; }
+.caveat-body strong { color: var(--text); }
+
+/* ── STAT PAIR (most active / active councillors) ───────────── */
+.stat-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 20px 0 28px;
+}
+.stat-item { padding: 18px 22px; }
+.stat-item + .stat-item { border-left: 1px solid var(--border); }
+.stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.stat-val {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.stat-sub { font-size: 12px; color: var(--muted); }
+
+/* ── WIKI TOC ─────────────────────────────────────────────────── */
+.wiki-toc {
+  display: inline-block;
+  border: 1px solid var(--border);
+  background: #f8f9fa;
+  border-radius: 4px;
+  padding: 14px 20px 16px;
+  margin-bottom: 32px;
+  min-width: 220px;
+}
+.wiki-toc-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.wiki-toc ol {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  list-style: decimal;
+}
+.wiki-toc li { margin-bottom: 6px; }
+.wiki-toc a {
+  color: #0645ad;
+  font-size: 13px;
+  text-decoration: none;
+}
+.wiki-toc a:hover { text-decoration: underline; }
+.wiki-toc-source {
+  font-size: 11.5px;
+  color: var(--muted);
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.wiki-toc-source a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ── FOOTER ─────────────────────────────────────────────────── */
+.page-footer {
+  margin-top: 44px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: .02em;
+}
+
+/* ── DIVIDER ─────────────────────────────────────────────────── */
+.divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+/* ── SITE HEADER & FOOTER ────────────────────────────────────── */
+.site-header {
+  height: 44px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  background: var(--white);
+}
+.site-header .brand {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+.site-header .brand span { font-weight: 400; color: var(--muted); }
+.site-header .back-link {
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.site-header .back-link:hover { color: var(--text); }
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 14px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 64px;
+}
+
+/* ── REPORT COVER ───────────────────────────────────────────── */
+.report-cover {
+  width: 100%;
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+}
+.report-icon-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+.report-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin-top: -36px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+@media print {
+  body { background: white; }
+  .outer { padding: 0 24px; }
+  .body-layout { display: block; }
+  .toc-col { display: none; }
+  .page { padding: 32px 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="../../index.html">Janaagraha <span>· CLDP</span></a>
+  <a class="back-link" href="../../index.html">← All Reports</a>
+</header>
+
+<div class="report-cover" style="background-image: url('../../cover_assam.jpg')"></div>
+<div class="outer">
+
+<!-- ══════════════════════════════════════════
+     ABOUT THE REPORT — full width
+══════════════════════════════════════════════ -->
+<section class="about-section" id="about">
+  <div class="kicker">Engagement Report · CLDP Assam</div>
+  <h1>Assam<br>Jan 2026 – Jun 2026</h1>
+  <p class="subtitle">Analysis of the Nagaon district CLDP WhatsApp group</p>
+
+  <h2>About the report</h2>
+
+  <p style="font-size:13.5px;color:#b91c1c;margin-bottom:20px;font-weight:500;">⚠ This report is intended for internal team use only. The source data contains phone numbers — please be mindful before sharing the source file externally.</p>
+
+  <div class="caveat">
+    <div class="caveat-n">1</div>
+    <div class="caveat-body"><strong>How messages were grouped.</strong> Each person's messages sent within 5 minutes of each other were treated as a single exchange. A photo, its caption, and a follow-up note sent in quick succession count as one. After removing system notices, deleted messages and media-only repeats, the source export condenses to 19 grouped exchanges, which form the basis of all figures in this report.</div>
+  </div>
+  <div class="caveat">
+    <div class="caveat-n">2</div>
+    <div class="caveat-body"><strong>Total membership could not be established.</strong> Almost everyone joined this group silently through a group-invite link, so the export contains no add/join records to count from. Figures in this report are therefore based on <strong>active participants</strong> — the 9 people who sent at least one message — and not on full group size.</div>
+  </div>
+  <div class="caveat">
+    <div class="caveat-n">3</div>
+    <div class="caveat-body"><strong>Photos and media are read in context.</strong> Media files cannot be opened from a WhatsApp export. Where a photo was sent alongside a caption or text in the same exchange, the text was used to understand what the media was about. Photos sent with no text at all are noted but not categorised.</div>
+  </div>
+
+  <p style="margin-top:20px;font-size:12px;color:var(--muted);">Source data: <a href="clustered_messages.csv" style="color:var(--green);text-decoration:underline;text-underline-offset:2px;">19 clustered message exchanges</a> &nbsp;·&nbsp; Report generated on 13 June 2026</p>
+</section>
+
+<!-- ══════════════════════════════════════════
+     BODY: TOC + MAIN CONTENT
+══════════════════════════════════════════════ -->
+<div class="body-layout">
+
+  <nav class="toc-col">
+    <div class="toc-label">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#key-themes">Key Themes</a></li>
+      <li><a href="#sender-analysis">Sender Analysis</a></li>
+      <li><a href="#post-performance">Post Performance</a></li>
+      <li><a href="#poll-analysis">Poll Analysis</a></li>
+      <li><a href="#mom-progress">Month-on-Month Progress</a></li>
+    </ul>
+  </nav>
+
+<main class="main">
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 1 — OVERVIEW
+══════════════════════════════════════════════ -->
+<div class="page" id="overview">
+  <div class="page-band">
+<span class="section-num">Overview</span>
+  </div>
+
+  <h2>Overview</h2>
+  <p class="section-sub">Group activity across the Nagaon district CLDP WhatsApp group, Jan 2026 – Jun 2026</p>
+
+  <div class="kpi-strip">
+    <div class="kpi-card">
+      <div class="kpi-label">Number of groups</div>
+      <div class="kpi-val">1</div>
+      <div class="kpi-sub">Nagaon district CLDP group (WhatsApp)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Active participants</div>
+      <div class="kpi-val">9</div>
+      <div class="kpi-sub">4 Janaagraha admins · 5 councillors</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Messages sent vs. received</div>
+      <div class="kpi-val">58% / 42%</div>
+      <div class="kpi-sub">Janaagraha (admin) · Councillors</div>
+    </div>
+  </div>
+
+  <div class="stat-pair">
+    <div class="stat-item">
+      <div class="stat-label">Most active councillor</div>
+      <div class="stat-val">~ Anima das</div>
+      <div class="stat-sub">Raha Municipal Board · 3 message clusters</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Active councillors</div>
+      <div class="stat-val">5</div>
+      <div class="stat-sub">Unique councillors who sent at least one message</div>
+    </div>
+  </div>
+
+  <div class="cloud-section">
+    <div class="cloud-title">Topics discussed by councillors</div>
+    <div class="cloud-wrap">
+      <span class="cloud-tag xl">certificate requests</span>
+      <span class="cloud-tag xl">programme photos</span>
+      <span class="cloud-tag lg">Bhogali Bihu greetings</span>
+      <span class="cloud-tag lg">Republic Day wishes</span>
+      <span class="cloud-tag md">thank-you messages</span>
+      <span class="cloud-tag sm">Raha Municipal Board</span>
+    </div>
+    <div class="area-row">
+      <span class="area-label">Areas mentioned</span>
+      <span class="area-pill">Nagaon district</span>
+      <span class="area-pill">Raha</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 2 — KEY THEMES
+══════════════════════════════════════════════ -->
+<div class="page" id="key-themes">
+  <div class="page-band">
+<span class="section-num">Key themes</span>
+  </div>
+
+  <h2>Key themes</h2>
+  <p class="section-sub">Based on councillor messages only</p>
+
+  <div class="two-col">
+    <div>
+      <h3>CLDP Programme Engagement</h3>
+      <p class="theme-desc">The dominant theme by far. Councillor activity centred on the programme itself — requesting and acknowledging participation certificates, asking for and thanking admins for the shared programme photos, and confirming which municipal board they represent. This is logistics-and-gratitude engagement rather than field reporting.</p>
+
+      <h3>Community Programmes</h3>
+      <p class="theme-desc">Festival and civic-observance greetings shared by councillors — Bhogali Bihu wishes (with a photo) and a Happy Republic Day message (with a photo). These were one-way greetings that drew no further discussion.</p>
+
+      <p class="theme-desc" style="color:var(--red);"><strong>Notable gap:</strong> Unlike Karnataka, this group contains <strong>no councillor updates on roads, drains, ward works or field activity</strong>. Councillor messages were limited to programme logistics and festival greetings across the full six-month period.</p>
+    </div>
+    <div>
+      <canvas id="themePie"></canvas>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 3 — SENDER ANALYSIS
+══════════════════════════════════════════════ -->
+<div class="page" id="sender-analysis">
+  <div class="page-band">
+<span class="section-num">Sender analysis</span>
+  </div>
+
+  <h2>Sender analysis</h2>
+  <p class="section-sub">19 message clusters · 9 unique senders · 5 councillors · 4 Janaagraha admins</p>
+
+  <div class="sender-grid">
+    <div>
+      <div class="bar-row">
+        <div class="bar-name">Himanga Gogoi <span class="badge">Admin</span></div>
+        <div class="bar-track"><div class="bar-fill jg" style="width:100%"></div><span class="bar-num">4</span></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">Shinjini <span class="badge">Admin</span></div>
+        <div class="bar-track"><div class="bar-fill jg" style="width:100%"></div><span class="bar-num">4</span></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">~ Anima das <span style="font-size:11px;color:var(--muted)">(Raha)</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:75%"></div><span class="bar-num">3</span></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">~ MATU MONI BORUAH</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%"></div><span class="bar-num">2</span></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">Aarushi <span class="badge">Admin</span></div>
+        <div class="bar-track"><div class="bar-fill jg" style="width:50%"></div><span class="bar-num">2</span></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">~ silpisikhagogoi76</div>
+        <div class="bar-track"><div class="bar-fill" style="width:25%"></div><span class="bar-num">1</span></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">~ Malabika Bora</div>
+        <div class="bar-track"><div class="bar-fill" style="width:25%"></div><span class="bar-num">1</span></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">~ preetybordoloi38427</div>
+        <div class="bar-track"><div class="bar-fill" style="width:25%"></div><span class="bar-num">1</span></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">Chandrabhan Kakoty <span class="badge">Admin</span></div>
+        <div class="bar-track"><div class="bar-fill jg" style="width:25%"></div><span class="bar-num">1</span></div>
+      </div>
+    </div>
+
+    <div>
+      <canvas id="senderPie"></canvas>
+      <p class="chart-note" style="margin-top:14px;">Navy = Janaagraha admins &nbsp;·&nbsp; Green = Councillors</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 4 — POST PERFORMANCE
+══════════════════════════════════════════════ -->
+<div class="page" id="post-performance">
+  <div class="page-band">
+<span class="section-num">Post performance</span>
+  </div>
+
+  <h2>Post performance</h2>
+  <p class="section-sub">What drove responses — and what didn't</p>
+
+  <div class="post-group-label"><span class="dot dot-green"></span> High-impact posts</div>
+
+  <div class="post-card high">
+    <div>
+      <div class="post-meta">10 Feb 2026 · ~ MATU MONI BORUAH → Chandrabhan Kakoty</div>
+      <div class="post-title">Certificate delivery query</div>
+      <div class="post-quote">"Sir, when will I get the certificates?" — answered the same minute by the admin.</div>
+    </div>
+    <div><span class="post-stat-pill">Genuine 2-way exchange</span></div>
+  </div>
+
+  <div class="post-card high">
+    <div>
+      <div class="post-meta">9–13 Jan 2026 · Himanga Gogoi</div>
+      <div class="post-title">Programme photo sharing + Drive link</div>
+      <div class="post-quote">Batch of event photos and a Google Drive folder link for councillors to download their programme photos.</div>
+    </div>
+    <div><span class="post-stat-pill">Drew thank-you replies</span></div>
+  </div>
+
+  <div class="post-card high">
+    <div>
+      <div class="post-meta">2 Mar 2026 · Shinjini</div>
+      <div class="post-title">OSR poll</div>
+      <div class="post-quote">"Which strategy is most helpful for increasing our ward revenue (OSR)?"</div>
+    </div>
+    <div><span class="post-stat-pill">4 votes cast</span></div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="post-group-label"><span class="dot dot-grey"></span> Low-impact posts</div>
+  <p style="font-size:12px;color:#b91c1c;margin-bottom:16px;line-height:1.6;font-weight:500;">WhatsApp reactions (emoji responses) are not captured in the export unless a member typed it as an explicit reply. Posts in this section may have received acknowledgements or reactions that have not been considered in the analysis.</p>
+
+  <div class="post-card low">
+    <div>
+      <div class="post-meta">2 Mar 2026 · Shinjini</div>
+      <div class="post-title">Own Source Revenue (OSR) explainer</div>
+      <div class="post-quote">Detailed educational post on property tax, user charges and digital asset mapping.</div>
+    </div>
+    <div><span class="post-stat-pill">0 replies</span></div>
+  </div>
+
+  <div class="post-card low">
+    <div>
+      <div class="post-meta">17 Apr 2026 · Shinjini</div>
+      <div class="post-title">AMRUT 2.0 scheme explainer</div>
+      <div class="post-quote">Detailed post on the water security mission and the councillor's role.</div>
+    </div>
+    <div><span class="post-stat-pill">0 replies</span></div>
+  </div>
+
+  <div class="post-card low">
+    <div>
+      <div class="post-meta">1 Jun 2026 · Aarushi</div>
+      <div class="post-title">74th Amendment anniversary greeting</div>
+      <div class="post-quote">Greeting marking 33 years of the 74th Constitutional Amendment.</div>
+    </div>
+    <div><span class="post-stat-pill">1 thank-you only</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 5 — POLL ANALYSIS
+══════════════════════════════════════════════ -->
+<div class="page" id="poll-analysis">
+  <div class="page-band">
+<span class="section-num">Poll analysis</span>
+  </div>
+
+  <h2>Poll analysis</h2>
+  <p class="section-sub">One poll ran in the group across the full period</p>
+
+  <div class="poll-wrap">
+    <div class="poll-q">Which strategy is most helpful for increasing our ward revenue (OSR)?</div>
+    <div class="poll-meta">Posted 2 Mar 2026 · Shinjini</div>
+
+    <div class="poll-row">
+      <div class="poll-label">House-to-house tax awareness</div>
+      <div class="poll-track">
+        <div class="poll-fill winner" style="width:75%">3 votes · 75%</div>
+      </div>
+      <div class="poll-votes-label">🏆 Winner</div>
+    </div>
+    <div class="poll-row">
+      <div class="poll-label">Digital survey / GIS mapping</div>
+      <div class="poll-track">
+        <div class="poll-fill" style="width:25%">1 vote · 25%</div>
+      </div>
+      <div class="poll-votes-label"></div>
+    </div>
+    <div class="poll-row">
+      <div class="poll-label">User charges (waste / water)</div>
+      <div class="poll-track">
+        <div class="poll-fill" style="width:4%">0 votes</div>
+      </div>
+      <div class="poll-votes-label"></div>
+    </div>
+    <div class="poll-row">
+      <div class="poll-label">Simplify online payment</div>
+      <div class="poll-track">
+        <div class="poll-fill" style="width:4%">0 votes</div>
+      </div>
+      <div class="poll-votes-label"></div>
+    </div>
+
+    <div class="poll-footer">Only 4 votes cast — very low participation. A total group size could not be established from the export, so a precise participation rate cannot be computed.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 6 — MONTH-ON-MONTH PROGRESS
+══════════════════════════════════════════════ -->
+<div class="page" id="mom-progress">
+  <div class="page-band">
+<span class="section-num">Month-on-month</span>
+  </div>
+
+  <h2>Month-on-month progress</h2>
+  <p class="section-sub">Message clusters by month, split by sender type</p>
+
+  <p style="font-size:13.5px;color:var(--text);line-height:1.65;margin-bottom:28px;padding:16px 20px;background:var(--green-light);border-radius:6px;">Since the group became active in January 2026, overall engagement has declined. Activity peaked in the launch month (9 clusters — driven by onboarding photos and festival greetings) and fell to low single digits from February onward, dominated by one-way Janaagraha educational posts. May 2026 was completely silent, and June saw only a small uptick around the 74th Amendment anniversary. The trend mirrors the wider CLDP pattern: early onboarding energy was not sustained, and without interactive prompts councillor activity tapered off.</p>
+
+  <table class="mtable">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Total clusters</th>
+        <th>Janaagraha</th>
+        <th>Councillors</th>
+        <th>vs. prev</th>
+        <th style="width:34%">Key events</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="peak">
+        <td><strong>Jan 2026</strong></td>
+        <td><strong>9</strong></td>
+        <td>4</td>
+        <td>5</td>
+        <td class="trend-flat">— launch</td>
+        <td>Group becomes active; programme photos &amp; Drive link; scheme PDFs; Bhogali Bihu and Republic Day greetings</td>
+      </tr>
+      <tr>
+        <td><strong>Feb 2026</strong></td>
+        <td><strong>3</strong></td>
+        <td>1</td>
+        <td>2</td>
+        <td class="trend-down">▼ 67%</td>
+        <td>Certificate delivery exchange — the only genuine back-and-forth in the group</td>
+      </tr>
+      <tr>
+        <td><strong>Mar 2026</strong></td>
+        <td><strong>3</strong></td>
+        <td>3</td>
+        <td>0</td>
+        <td class="trend-flat">— flat</td>
+        <td>OSR explainer + poll (4 votes); CLDP Delhi leadership thank-you</td>
+      </tr>
+      <tr>
+        <td><strong>Apr 2026</strong></td>
+        <td><strong>1</strong></td>
+        <td>1</td>
+        <td>0</td>
+        <td class="trend-down">▼ 67%</td>
+        <td>AMRUT 2.0 explainer; no councillor activity</td>
+      </tr>
+      <tr>
+        <td><strong>May 2026</strong></td>
+        <td><strong>0</strong></td>
+        <td>0</td>
+        <td>0</td>
+        <td class="trend-down">▼ 100%</td>
+        <td>Silent month — no content messages</td>
+      </tr>
+      <tr>
+        <td><strong>Jun 2026</strong></td>
+        <td><strong>3</strong></td>
+        <td>2</td>
+        <td>1</td>
+        <td class="trend-up">▲ new</td>
+        <td>74th Amendment anniversary greeting; one thank-you; a photo (data up to 5 Jun)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="obs-block">
+    <div class="obs-period">January 2026</div>
+    <p>Launch-window peak. Onboarding drove most of the activity — admins sharing event photos and scheme documents, and councillors responding with festival greetings and thank-yous. This was the most participatory month of the whole period.</p>
+  </div>
+  <div class="obs-block">
+    <div class="obs-period">Feb – Apr 2026</div>
+    <p>Activity cliff. The February certificate exchange was the only genuine dialogue; March and April were carried almost entirely by Janaagraha educational posts (OSR, AMRUT 2.0) that drew no councillor replies. The OSR poll's 4 votes were the single largest piece of councillor interaction in this window.</p>
+  </div>
+  <div class="obs-block">
+    <div class="obs-period">May – Jun 2026</div>
+    <p>May was silent. June's small revival was admin-led — a 74th Amendment greeting and a photo — with just one councillor thank-you in response. Councillor-initiated field activity remained absent throughout.</p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     CHARTS
+══════════════════════════════════════════════ -->
+<script>
+const GREEN  = '#003049';
+const NAVY   = '#780000';
+const COLORS = ['#003049','#669BBC','#C1121F'];
+
+// Theme pie
+new Chart(document.getElementById('themePie'), {
+  type: 'pie',
+  data: {
+    labels: ['CLDP Programme Engagement','Community Programmes'],
+    datasets: [{ data: [6,2], backgroundColor: COLORS, borderWidth: 2, borderColor: '#fff' }]
+  },
+  options: {
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, family: 'Inter' }, padding: 10, boxWidth: 12 } },
+      title:  { display: true, text: 'Councillor message clusters by theme',
+                font: { size: 12, family: 'Inter', weight: '500' }, color: '#6b7280', padding: { bottom: 14 } }
+    }
+  }
+});
+
+// Sender doughnut
+new Chart(document.getElementById('senderPie'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Janaagraha (58%)', 'Councillors (42%)'],
+    datasets: [{ data: [11, 8], backgroundColor: [NAVY, GREEN], borderWidth: 3, borderColor: '#fff' }]
+  },
+  options: {
+    cutout: '60%',
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, family: 'Inter' }, padding: 10, boxWidth: 12 } }
+    }
+  }
+});
+
+// TOC active highlighting on scroll
+const tocLinks = document.querySelectorAll('.toc-list a');
+const sections = ['overview','key-themes','sender-analysis','post-performance','poll-analysis','mom-progress']
+  .map(id => document.getElementById(id)).filter(Boolean);
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      tocLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</main>
+</div><!-- end body-layout -->
+</div><!-- end outer -->
+
+<footer class="site-footer">
+  <span>Janaagraha · CLDP Programme</span>
+  <span>Internal use only</span>
+</footer>
+
+</body>
+</html>
